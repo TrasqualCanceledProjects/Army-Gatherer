@@ -13,6 +13,7 @@ public class PlayerController : CharacterBase
         charactersType = characterData.CharacterType;
         characterInput = GetComponent<IInput>();
         mover = new TransformMover(transform, characterInput, characterData);
+        equippedWeapon = GetComponentInChildren<WeaponBase>();
     }
 
     public void Update()

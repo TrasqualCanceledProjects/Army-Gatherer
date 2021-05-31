@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class CharacterBase : MonoBehaviour
 {
-    [SerializeField] protected float detectionRange = 20f;
+    [SerializeField] protected float detectionRange = 10f;
     public CharacterType charactersType;
 
     public event Action OnAttack;

@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c4d138c5da38e014999d8f66001bfbf1, type: 3}
-  m_Name: SwordData
+  m_Name: BowData
   m_EditorClassIdentifier: 
-  attackRange: 4
-  attackSpeed: 2
+  attackRange: 12
+  attackSpeed: 3
   damage: 10
