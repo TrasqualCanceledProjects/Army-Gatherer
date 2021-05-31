@@ -7,5 +7,13 @@ public abstract class WeaponBase : MonoBehaviour
     public float AttackRange { get { return weaponData.AttackRange; } }
     public float Damage { get { return weaponData.Damage; } }
 
+    CharacterBase character;
+
+    private void Start()
+    {
+        character = GetComponentInParent<CharacterBase>();
+        character.OnAttack += WeaponAttack;
+    }
+
     public abstract void WeaponAttack();
 }

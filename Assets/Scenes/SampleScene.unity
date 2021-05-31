@@ -97,7 +97,8 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 1b0561a84a9b76d4b966bd717461f5c3,
+    type: 2}
   m_LightingSettings: {fileID: 184848989}
 --- !u!196 &4
 NavMeshSettings:
@@ -964,9 +965,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f31b51bb16d20164aa70f271e2fcccee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterData: {fileID: 11400000, guid: d8e8972c3c1ec6b4d8e3ffbc84803ccb, type: 2}
-  equippedWeapon: {fileID: 117938245}
+  detectionRange: 20
+  charactersType: 2
   chaseRange: 10
+  equippedWeapon: {fileID: 117938245}
 --- !u!4 &543379393250048224 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8514388664279744198, guid: 1946b11ec2b9b4f45aef3b5618227ac3,

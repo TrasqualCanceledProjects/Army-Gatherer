@@ -5,7 +5,7 @@ using UnityEngine;
 
 public static class Utilities
 {
-    public static Collider[] InRangeCheck(Vector3 centerPosition, float radius)
+    public static Collider[] GetCollidersInRange(Vector3 centerPosition, float radius)
     {
         return Physics.OverlapSphere(centerPosition, radius);
     }

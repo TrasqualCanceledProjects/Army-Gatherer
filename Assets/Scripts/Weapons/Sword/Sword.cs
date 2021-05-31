@@ -4,16 +4,8 @@ using UnityEngine;
 
 public class Sword : WeaponBase
 {
-    CharacterBase character;
-
-    private void Start()
-    {
-        character = GetComponentInParent<CharacterBase>();
-        character.OnAttack += WeaponAttack;
-    }
-
     public override void WeaponAttack()
     {
-        Debug.Log("attacked with sword");
+        Debug.Log("attacked with sword" + transform.parent.name);
     }
 }

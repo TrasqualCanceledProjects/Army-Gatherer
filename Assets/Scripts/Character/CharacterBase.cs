@@ -1,31 +1,50 @@
 ﻿using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CharacterBase : MonoBehaviour
 {
-    [SerializeField] protected CharacterSettings characterData = null;
-    [SerializeField] protected WeaponBase equippedWeapon = null;
+    [SerializeField] protected float detectionRange = 20f;
+    public CharacterType charactersType;
 
     public event Action OnAttack;
 
-    private Transform target;
+    protected Transform target;
 
-    protected void CharactersOfTypeInRange(CharacterType characterTypeToCheck)
+    protected void GetNearestCharacter(CharacterType characterType)
     {
-        foreach (var collider in Utilities.InRangeCheck(transform.position, equippedWeapon.AttackRange))
+        float maxDistance = Mathf.Infinity;
+        Transform closestTarget = null;
+        var collidersInRange = Utilities.GetCollidersInRange(transform.position, detectionRange);
+        if (collidersInRange != null)
         {
+            foreach (var collider in collidersInRange)
+            {
+                if(collider.GetComponent<CharacterBase>() != null)
+                {
+                    if (collider.GetComponent<CharacterBase>().charactersType == characterType)
+                    {
+                        float distance = Vector3.Distance(transform.position, collider.transform.position);
 
+                        if (distance < maxDistance)
+                        {
+                            closestTarget = collider.transform;
+                            maxDistance = distance;
+                        }
+                    }
+                }
+            }
+            target = closestTarget;
         }
+        else
+        {
+            target = null;
+        }
+
     }
 
-    protected bool IsAnyEnemyInRange()
+    protected void Attack()
     {
-        return (Utilities.InRangeCheck(transform.position, equippedWeapon.AttackRange).Length != 0);
-    }
-
-    protected void Attack(float range)
-    {
+        transform.LookAt(target);
         OnAttack?.Invoke();
     }
 }
