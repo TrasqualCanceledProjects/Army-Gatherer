@@ -1,9 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyController : MonoBehaviour
+public class EnemyController : CharacterBase
 {
-    [SerializeField] private CharacterSettings characterData = null;
     [SerializeField] private float chaseRange = 10f;
 
     private MoverBase enemyMover;
@@ -24,5 +23,10 @@ public class EnemyController : MonoBehaviour
             enemyMover.Move(player.position);
         else
             enemyMover.Move(initialPosition);
+    }
+
+    private void FixedUpdate()
+    {
+
     }
 }

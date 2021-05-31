@@ -8,9 +8,6 @@ public class CharacterSettings : ScriptableObject
     [SerializeField] private float moveSpeed = 10f;
     [SerializeField] private CharacterType characterType = CharacterType.Player;
 
-    [Header("AttackParameters")]
-    [SerializeField] private float attackRange = 8f;
-
     public float TurnSpeed { get { return turnSpeed; } }
     public float MoveSpeed { get { return moveSpeed; } }
     public CharacterType CharacterType { get { return characterType; } }

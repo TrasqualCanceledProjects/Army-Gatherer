@@ -14,6 +14,8 @@ public class TransformMover : MoverBase
         this.characterData = characterData;
     }
 
+    public override bool IsMoving { get { return input.MovementVector.magnitude > 0; } }
+
     public override void Move()
     {
         Rotate();

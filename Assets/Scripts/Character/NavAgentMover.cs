@@ -10,6 +10,8 @@ public class NavAgentMover : MoverBase
         this.navAgentToMove = navAgentToMove;
     }
 
+    public override bool IsMoving {get { return navAgentToMove.velocity.magnitude > 0; } }
+
     public override void Move(Vector3 target)
     {
         navAgentToMove.SetDestination(target);

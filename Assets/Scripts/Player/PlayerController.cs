@@ -1,11 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
+using System.Linq;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : CharacterBase
 {
-    [SerializeField] private CharacterSettings characterData = null;
-
     private IInput characterInput;
     private MoverBase mover;
 
@@ -19,5 +17,14 @@ public class PlayerController : MonoBehaviour
     {
         characterInput.GetInput();
         mover.Move();
+        if (!mover.IsMoving && IsAnyEnemyInRange())
+        {
+
+        }
+    }
+
+    private void FixedUpdate()
+    {
+
     }
 }
