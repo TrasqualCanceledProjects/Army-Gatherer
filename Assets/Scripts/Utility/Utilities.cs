@@ -14,4 +14,15 @@ public static class Utilities
     {
         return colliderList.OrderBy(x => (x.transform.position - toTransform.position)).First().transform;
     }
+
+    public static int CalculateIncrementalValue(int valueToIncrease, int incrementAmount, int incrementTimes)
+    {
+        var newValue = valueToIncrease;
+        for (int i = 0; i < incrementTimes; i++)
+        {
+            newValue += i * incrementAmount;
+        }
+        return newValue;
+    }
 }
+

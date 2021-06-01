@@ -4,11 +4,21 @@ using UnityEngine;
 public class CharacterBase : MonoBehaviour
 {
     [SerializeField] protected float detectionRange = 10f;
+    [SerializeField] protected CharacterSettings characterData = null;
+    [SerializeField] protected WeaponBase equippedWeapon = null;
+
     public CharacterType charactersType;
 
     public event Action OnAttack;
 
     protected Transform target;
+
+
+    public virtual void Awake()
+    {
+        equippedWeapon = GetComponentInChildren<WeaponBase>();
+        charactersType = characterData.CharacterType;
+    }
 
     protected void GetNearestCharacter(CharacterType characterType)
     {

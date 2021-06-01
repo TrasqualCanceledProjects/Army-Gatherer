@@ -12,6 +12,7 @@ public abstract class WeaponBase : MonoBehaviour
     private void Start()
     {
         character = GetComponentInParent<CharacterBase>();
+        if(character != null)
         character.OnAttack += WeaponAttack;
     }
 

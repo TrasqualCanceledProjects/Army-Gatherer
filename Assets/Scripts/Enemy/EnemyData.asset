@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 876c3a949382bd042901c23429d80fa2, type: 3}
   m_Name: EnemyData
   m_EditorClassIdentifier: 
-  turnSpeed: 25
+  turnSpeed: 3
   moveSpeed: 10
   characterType: 2
-  attackRange: 8

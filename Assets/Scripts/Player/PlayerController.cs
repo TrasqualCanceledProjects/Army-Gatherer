@@ -2,18 +2,14 @@
 
 public class PlayerController : CharacterBase
 {
-    [SerializeField] private CharacterSettings characterData = null;
-    [SerializeField] private WeaponBase equippedWeapon = null;
-
     private IInput characterInput;
     private MoverBase mover;
 
-    public void Awake()
+    public override void Awake()
     {
-        charactersType = characterData.CharacterType;
+        base.Awake();
         characterInput = GetComponent<IInput>();
         mover = new TransformMover(transform, characterInput, characterData);
-        equippedWeapon = GetComponentInChildren<WeaponBase>();
     }
 
     public void Update()
