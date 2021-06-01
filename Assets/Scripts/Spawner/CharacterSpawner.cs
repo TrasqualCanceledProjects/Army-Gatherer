@@ -28,7 +28,7 @@ public class CharacterSpawner : MonoBehaviour
 
         for (int i = 0; i < amountOfFriendliesToSpawn; i++)
         {
-            var spawnedFriendly = Instantiate(friendlyPrefab, spawnPositions[i], SpawnRotation(spawnPositions[i]));
+            var spawnedFriendly = Instantiate(friendlyPrefab, spawnPositions[i], Utilities.GetRandomDirection(100));
             spawnedFriendlies.Add(spawnedFriendly);
         }        
 
@@ -43,8 +43,8 @@ public class CharacterSpawner : MonoBehaviour
     {
         List<Vector3> positionList = new List<Vector3>();
         if (includeStartPosition) positionList.Add(startPosition);
-        int totalRingSpawn = AmountOfRings(amountOfCharactersToSpawn, multiplierForCharactersPerRing);
-        for (int i = 0; i < totalRingSpawn; i++)
+        int totalRingsToSpawn = AmountOfRings(amountOfCharactersToSpawn, multiplierForCharactersPerRing);
+        for (int i = 0; i < totalRingsToSpawn; i++)
         {
             positionList.AddRange(GetSpawnPositionsOnSingleRing(startPosition, distanceBetweenRings*i, multiplierForCharactersPerRing*i));
         }

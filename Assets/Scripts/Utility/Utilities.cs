@@ -24,5 +24,10 @@ public static class Utilities
         }
         return newValue;
     }
+
+    public static Quaternion GetRandomDirection(int angle)
+    {
+        return Quaternion.Euler(Random.insideUnitSphere * angle);
+    }
 }
 
