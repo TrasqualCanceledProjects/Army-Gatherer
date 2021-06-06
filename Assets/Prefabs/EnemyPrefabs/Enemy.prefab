@@ -87,7 +87,7 @@ MonoBehaviour:
   characterData: {fileID: 11400000, guid: d8e8972c3c1ec6b4d8e3ffbc84803ccb, type: 2}
   equippedWeapon: {fileID: 0}
   charactersType: 2
-  maxDistanceToTravel: 40
+  maxDistanceToTravel: 20
 --- !u!1 &8514388664579826333
 GameObject:
   m_ObjectHideFlags: 0

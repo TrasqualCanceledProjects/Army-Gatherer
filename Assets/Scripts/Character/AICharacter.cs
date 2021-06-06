@@ -7,13 +7,17 @@ using UnityEngine.AI;
 public class AICharacter : CharacterBase
 {
 
-    [SerializeField] private float maxDistanceToTravel = 40f;
+    [SerializeField] private float maxDistanceToTravel = 20f;
 
-    public event Action OnProvoked;
+    public event Action<Transform> OnProvoked;
+    public event Action<GameObject> OnDeath;
 
     protected Vector3 initialPosition;
     protected MoverBase enemyMover;
     protected NavMeshAgent navAgent;
+
+    private bool isReturning = false;
+    private bool isProvokedByNearby = false;
 
     public override void Awake()
     {
@@ -27,10 +31,18 @@ public class AICharacter : CharacterBase
         InitializeNavMesh();
     }
 
+    private void InitializeNavMesh()
+    {
+        initialPosition = transform.position;
+        if (equippedWeapon.AttackRange > detectionRange)
+            detectionRange += equippedWeapon.AttackRange;
+    }
+
     public virtual void Update()
     {
         if (IsProvoked())
         {
+            OnProvoked?.Invoke(target);
             EngageTarget();
         }
         else
@@ -63,6 +75,7 @@ public class AICharacter : CharacterBase
     {
         if (Vector3.Distance(transform.position, positionToReturnTo) < 0.1f)
         {
+            isReturning = false;
             return;
         }
         Debug.Log("moving back to initial pos");
@@ -85,26 +98,51 @@ public class AICharacter : CharacterBase
         enemyMover.Move(target.position);
     }
 
-    private void InitializeNavMesh()
-    {
-        initialPosition = transform.position;
-        if (equippedWeapon.AttackRange > detectionRange)
-            detectionRange += equippedWeapon.AttackRange;
-    }
-
     private bool IsProvoked()
     {
         if (target != null)
         {
-            if (IsTargetInSight())
+            if (IsTooFarAwayFromInitialPosition())
             {
-                return true;
-            }
-            else if (!IsTargetInSight() || IsTooFarAwayFromInitialPosition())
-            {
+                isProvokedByNearby = false;
+                isReturning = true;
+                target = null;
+                Debug.Log("I am too far away. Returning." + name);
                 return false;
+            }
+            else if (!IsTargetInSight())
+            {
+                if (isProvokedByNearby)
+                {
+                    Debug.Log("I am alerted." + name);
+                    return true;
+                }
+                else
+                {
+                    Debug.Log("Target ran away. Returning." + name);
+                    return false;
+                }
+            }
+            else if (IsTargetInSight() && !isReturning)
+            {
+                Debug.Log("Target near me." + name);
+                return true;
             }
         }
         return false;
+    }
+
+    public void SetTarget(Transform target)
+    {
+        if(this.target == null && !isReturning)
+        {
+            this.target = target;
+            isProvokedByNearby = true;
+        }
+    }
+
+    public void Die()
+    {
+        OnDeath?.Invoke(gameObject);
     }
 }

@@ -12,11 +12,11 @@ public class CharacterSpawner : MonoBehaviour
     [SerializeField] private int multiplierForCharactersPerRing = 5;
     [SerializeField] private int distanceBetweenRings = 5;
 
-    public List<GameObject> spawnedFriendlies = new List<GameObject>();
-    public List<GameObject> spawnedEnemies = new List<GameObject>();
+    SpawnGroupManager spawnManager;
 
     private void Start()
     {
+        spawnManager = new SpawnGroupManager();
         SpawnCharacters();
     }
 
@@ -29,13 +29,13 @@ public class CharacterSpawner : MonoBehaviour
         for (int i = 0; i < amountOfFriendliesToSpawn; i++)
         {
             var spawnedFriendly = Instantiate(friendlyPrefab, spawnPositions[i], Utilities.GetRandomDirection(100));
-            spawnedFriendlies.Add(spawnedFriendly);
+            spawnManager.AddFriendly(spawnedFriendly);
         }        
 
         for (int i = friendlyAndEmptySlots; i < totalSpawnSlots; i++)
         {
             var spawnedEnemy = Instantiate(enemyPrefab, spawnPositions[i], SpawnRotation(spawnPositions[i]));
-            spawnedEnemies.Add(spawnedEnemy);
+            spawnManager.AddEnemy(spawnedEnemy);
         }
     }
 
